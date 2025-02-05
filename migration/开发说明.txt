@@ -1,3 +1,5 @@
+#vscode单独打开migration,打开GeneratorSqlmap.java直接运行
+
 1.文件命名已经按照java 解决方案生成
 2.直接debug 项目即可，不然无法生成
 3.LibitemMapper.xml 重复了一份需要手动删除掉
