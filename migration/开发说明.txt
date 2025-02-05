@@ -1,0 +1,12 @@
+1.文件命名已经按照java 解决方案生成
+2.直接debug 项目即可，不然无法生成
+3.LibitemMapper.xml 重复了一份需要手动删除掉
+4.所有涉及 表结构Query  的Mapper 一律删除掉
+5.保留Mapper方法
+    deleteByPrimaryKey
+    insert
+    insertSelective
+    selectByPrimaryKey
+    updateByPrimaryKeySelective
+    updateByPrimaryKeyWithBLOBs
+    updateByPrimaryKey

@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.owen.admin.mapper.LiblayerMapper">
+  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Liblayer">
+    <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
+    <result column="LastModificationTime" jdbcType="TIMESTAMP" property="lastmodificationtime" />
+    <result column="LastModifierUserId" jdbcType="BIGINT" property="lastmodifieruserid" />
+    <result column="IsDeleted" jdbcType="BIT" property="isdeleted" />
+    <result column="DeleterUserId" jdbcType="BIGINT" property="deleteruserid" />
+    <result column="DeletionTime" jdbcType="TIMESTAMP" property="deletiontime" />
+    <result column="ShelfId" jdbcType="VARCHAR" property="shelfid" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Tid" jdbcType="VARCHAR" property="tid" />
+    <result column="Side" jdbcType="VARCHAR" property="side" />
+    <result column="LayerNo" jdbcType="TINYINT" property="layerno" />
+    <result column="IsEnable" jdbcType="BIT" property="isenable" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="TenantId" jdbcType="INTEGER" property="tenantid" />
+    <result column="ItemBarcode" jdbcType="VARCHAR" property="itembarcode" />
+    <result column="ItemCallNo" jdbcType="VARCHAR" property="itemcallno" />
+    <result column="PreCallNo" jdbcType="VARCHAR" property="precallno" />
+    <result column="Barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="OriginType" jdbcType="TINYINT" property="origintype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <if test="fields == null">
+      Id, CreationTime, CreatorUserId, LastModificationTime, LastModifierUserId, IsDeleted, 
+      DeleterUserId, DeletionTime, ShelfId, Code, Name, Tid, Side, LayerNo, IsEnable, Remark, 
+      TenantId, ItemBarcode, ItemCallNo, PreCallNo, Barcode, OriginType
+    </if>
+    <if test="fields != null">
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" parameterType="com.huawei.owen.admin.model.LiblayerQuery" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from liblayer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null">
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    Id,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeleterUserId,DeletionTime,ShelfId,Code,Name,Tid,Side,LayerNo,IsEnable,Remark,TenantId,ItemBarcode,ItemCallNo,PreCallNo,Barcode,OriginType
+    from liblayer
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from liblayer
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huawei.owen.admin.model.LiblayerQuery">
+    delete from liblayer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huawei.owen.admin.model.Liblayer">
+    insert into liblayer (Id, CreationTime, CreatorUserId, 
+      LastModificationTime, LastModifierUserId, 
+      IsDeleted, DeleterUserId, DeletionTime, 
+      ShelfId, Code, Name, 
+      Tid, Side, LayerNo, 
+      IsEnable, Remark, TenantId, 
+      ItemBarcode, ItemCallNo, PreCallNo, 
+      Barcode, OriginType)
+    values (#{id,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{isdeleted,jdbcType=BIT}, #{deleteruserid,jdbcType=BIGINT}, #{deletiontime,jdbcType=TIMESTAMP}, 
+      #{shelfid,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{tid,jdbcType=VARCHAR}, #{side,jdbcType=VARCHAR}, #{layerno,jdbcType=TINYINT}, 
+      #{isenable,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}, 
+      #{itembarcode,jdbcType=VARCHAR}, #{itemcallno,jdbcType=VARCHAR}, #{precallno,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{origintype,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Liblayer">
+    insert into liblayer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="creationtime != null">
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId,
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime,
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId,
+      </if>
+      <if test="isdeleted != null">
+        IsDeleted,
+      </if>
+      <if test="deleteruserid != null">
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null">
+        DeletionTime,
+      </if>
+      <if test="shelfid != null">
+        ShelfId,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="tid != null">
+        Tid,
+      </if>
+      <if test="side != null">
+        Side,
+      </if>
+      <if test="layerno != null">
+        LayerNo,
+      </if>
+      <if test="isenable != null">
+        IsEnable,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="tenantid != null">
+        TenantId,
+      </if>
+      <if test="itembarcode != null">
+        ItemBarcode,
+      </if>
+      <if test="itemcallno != null">
+        ItemCallNo,
+      </if>
+      <if test="precallno != null">
+        PreCallNo,
+      </if>
+      <if test="barcode != null">
+        Barcode,
+      </if>
+      <if test="origintype != null">
+        OriginType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shelfid != null">
+        #{shelfid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="side != null">
+        #{side,jdbcType=VARCHAR},
+      </if>
+      <if test="layerno != null">
+        #{layerno,jdbcType=TINYINT},
+      </if>
+      <if test="isenable != null">
+        #{isenable,jdbcType=BIT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="itembarcode != null">
+        #{itembarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcallno != null">
+        #{itemcallno,jdbcType=VARCHAR},
+      </if>
+      <if test="precallno != null">
+        #{precallno,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="origintype != null">
+        #{origintype,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huawei.owen.admin.model.LiblayerQuery" resultType="java.lang.Long">
+    select count(*) from liblayer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update liblayer
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtime != null">
+        CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creatoruserid != null">
+        CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodificationtime != null">
+        LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastmodifieruserid != null">
+        LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.isdeleted != null">
+        IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+      <if test="record.deleteruserid != null">
+        DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.deletiontime != null">
+        DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shelfid != null">
+        ShelfId = #{record.shelfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null">
+        Tid = #{record.tid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.side != null">
+        Side = #{record.side,jdbcType=VARCHAR},
+      </if>
+      <if test="record.layerno != null">
+        LayerNo = #{record.layerno,jdbcType=TINYINT},
+      </if>
+      <if test="record.isenable != null">
+        IsEnable = #{record.isenable,jdbcType=BIT},
+      </if>
+      <if test="record.remark != null">
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantid != null">
+        TenantId = #{record.tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="record.itembarcode != null">
+        ItemBarcode = #{record.itembarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemcallno != null">
+        ItemCallNo = #{record.itemcallno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.precallno != null">
+        PreCallNo = #{record.precallno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barcode != null">
+        Barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origintype != null">
+        OriginType = #{record.origintype,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update liblayer
+    set Id = #{record.id,jdbcType=VARCHAR},
+      CreationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{record.creatoruserid,jdbcType=BIGINT},
+      LastModificationTime = #{record.lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{record.lastmodifieruserid,jdbcType=BIGINT},
+      IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      DeleterUserId = #{record.deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{record.deletiontime,jdbcType=TIMESTAMP},
+      ShelfId = #{record.shelfid,jdbcType=VARCHAR},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      Tid = #{record.tid,jdbcType=VARCHAR},
+      Side = #{record.side,jdbcType=VARCHAR},
+      LayerNo = #{record.layerno,jdbcType=TINYINT},
+      IsEnable = #{record.isenable,jdbcType=BIT},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      TenantId = #{record.tenantid,jdbcType=INTEGER},
+      ItemBarcode = #{record.itembarcode,jdbcType=VARCHAR},
+      ItemCallNo = #{record.itemcallno,jdbcType=VARCHAR},
+      PreCallNo = #{record.precallno,jdbcType=VARCHAR},
+      Barcode = #{record.barcode,jdbcType=VARCHAR},
+      OriginType = #{record.origintype,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Liblayer">
+    update liblayer
+    <set>
+      <if test="creationtime != null">
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shelfid != null">
+        ShelfId = #{shelfid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null">
+        Tid = #{tid,jdbcType=VARCHAR},
+      </if>
+      <if test="side != null">
+        Side = #{side,jdbcType=VARCHAR},
+      </if>
+      <if test="layerno != null">
+        LayerNo = #{layerno,jdbcType=TINYINT},
+      </if>
+      <if test="isenable != null">
+        IsEnable = #{isenable,jdbcType=BIT},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        TenantId = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="itembarcode != null">
+        ItemBarcode = #{itembarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcallno != null">
+        ItemCallNo = #{itemcallno,jdbcType=VARCHAR},
+      </if>
+      <if test="precallno != null">
+        PreCallNo = #{precallno,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        Barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="origintype != null">
+        OriginType = #{origintype,jdbcType=TINYINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Liblayer">
+    update liblayer
+    set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      IsDeleted = #{isdeleted,jdbcType=BIT},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      ShelfId = #{shelfid,jdbcType=VARCHAR},
+      Code = #{code,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Tid = #{tid,jdbcType=VARCHAR},
+      Side = #{side,jdbcType=VARCHAR},
+      LayerNo = #{layerno,jdbcType=TINYINT},
+      IsEnable = #{isenable,jdbcType=BIT},
+      Remark = #{remark,jdbcType=VARCHAR},
+      TenantId = #{tenantid,jdbcType=INTEGER},
+      ItemBarcode = #{itembarcode,jdbcType=VARCHAR},
+      ItemCallNo = #{itemcallno,jdbcType=VARCHAR},
+      PreCallNo = #{precallno,jdbcType=VARCHAR},
+      Barcode = #{barcode,jdbcType=VARCHAR},
+      OriginType = #{origintype,jdbcType=TINYINT}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
