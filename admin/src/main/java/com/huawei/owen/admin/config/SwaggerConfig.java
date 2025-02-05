@@ -37,7 +37,8 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.huawei.owen.admin.controller"))
-                .paths(PathSelectors.any())
+                //.paths(PathSelectors.any())
+                .paths(PathSelectors.regex("/gpi.*")) // 只允许 /gpi 路径暴露
                 .build()
                 .globalOperationParameters(parameters);
     }
