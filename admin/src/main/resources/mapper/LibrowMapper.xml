@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.owen.admin.mapper.LibrowMapper">
+  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Librow">
+    <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
+    <result column="LastModificationTime" jdbcType="TIMESTAMP" property="lastmodificationtime" />
+    <result column="LastModifierUserId" jdbcType="BIGINT" property="lastmodifieruserid" />
+    <result column="IsDeleted" jdbcType="BIT" property="isdeleted" />
+    <result column="DeleterUserId" jdbcType="BIGINT" property="deleteruserid" />
+    <result column="DeletionTime" jdbcType="TIMESTAMP" property="deletiontime" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="CatalogCode" jdbcType="VARCHAR" property="catalogcode" />
+    <result column="RowNo" jdbcType="INTEGER" property="rowno" />
+    <result column="RowType" jdbcType="TINYINT" property="rowtype" />
+    <result column="RowUsageType" jdbcType="TINYINT" property="rowusagetype" />
+    <result column="LocationId" jdbcType="VARCHAR" property="locationid" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="TenantId" jdbcType="INTEGER" property="tenantid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, CreationTime, CreatorUserId, LastModificationTime, LastModifierUserId, IsDeleted, 
+      DeleterUserId, DeletionTime, Code, Name, CatalogCode, RowNo, RowType, RowUsageType, 
+      LocationId, Remark, TenantId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from librow
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+ <select id="findPage" resultType="com.huawei.owen.admin.model.Librow" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from librow 
+    order by creationtime desc 
+  </select>
+  <select id="findPageByMap" resultType="com.huawei.owen.admin.model.Librow" parameterType="map" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from librow
+      where 1=1 
+      <if test="params.id != null and params.id != ''">
+          AND id =#{params.id}
+      </if>
+      <if test="params.locationId != null and params.locationId != ''">
+          AND LocationId =#{params.locationId}
+      </if>
+      <if test="params.rowId != null and params.rowId != ''">
+          AND Id =#{params.rowId}
+      </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from librow
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huawei.owen.admin.model.Librow">
+    insert into librow (Id, CreationTime, CreatorUserId, 
+      LastModificationTime, LastModifierUserId, 
+      IsDeleted, DeleterUserId, DeletionTime, 
+      Code, Name, CatalogCode, 
+      RowNo, RowType, RowUsageType, 
+      LocationId, Remark, TenantId
+      )
+    values (#{id,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{isdeleted,jdbcType=BIT}, #{deleteruserid,jdbcType=BIGINT}, #{deletiontime,jdbcType=TIMESTAMP}, 
+      #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{catalogcode,jdbcType=VARCHAR}, 
+      #{rowno,jdbcType=INTEGER}, #{rowtype,jdbcType=TINYINT}, #{rowusagetype,jdbcType=TINYINT}, 
+      #{locationid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Librow">
+    insert into librow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="creationtime != null">
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId,
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime,
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId,
+      </if>
+      <if test="isdeleted != null">
+        IsDeleted,
+      </if>
+      <if test="deleteruserid != null">
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null">
+        DeletionTime,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="catalogcode != null">
+        CatalogCode,
+      </if>
+      <if test="rowno != null">
+        RowNo,
+      </if>
+      <if test="rowtype != null">
+        RowType,
+      </if>
+      <if test="rowusagetype != null">
+        RowUsageType,
+      </if>
+      <if test="locationid != null">
+        LocationId,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="tenantid != null">
+        TenantId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogcode != null">
+        #{catalogcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rowno != null">
+        #{rowno,jdbcType=INTEGER},
+      </if>
+      <if test="rowtype != null">
+        #{rowtype,jdbcType=TINYINT},
+      </if>
+      <if test="rowusagetype != null">
+        #{rowusagetype,jdbcType=TINYINT},
+      </if>
+      <if test="locationid != null">
+        #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Librow">
+    update librow
+    <set>
+      <if test="creationtime != null">
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogcode != null">
+        CatalogCode = #{catalogcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rowno != null">
+        RowNo = #{rowno,jdbcType=INTEGER},
+      </if>
+      <if test="rowtype != null">
+        RowType = #{rowtype,jdbcType=TINYINT},
+      </if>
+      <if test="rowusagetype != null">
+        RowUsageType = #{rowusagetype,jdbcType=TINYINT},
+      </if>
+      <if test="locationid != null">
+        LocationId = #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        TenantId = #{tenantid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Librow">
+    update librow
+    set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      IsDeleted = #{isdeleted,jdbcType=BIT},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      Code = #{code,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      CatalogCode = #{catalogcode,jdbcType=VARCHAR},
+      RowNo = #{rowno,jdbcType=INTEGER},
+      RowType = #{rowtype,jdbcType=TINYINT},
+      RowUsageType = #{rowusagetype,jdbcType=TINYINT},
+      LocationId = #{locationid,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      TenantId = #{tenantid,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

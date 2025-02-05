@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.owen.admin.mapper.LibitemMapper">
+  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libitem">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="creatoruserid" jdbcType="BIGINT" property="creatoruserid" />
+    <result column="lastmodificationtime" jdbcType="TIMESTAMP" property="lastmodificationtime" />
+    <result column="lastmodifieruserid" jdbcType="BIGINT" property="lastmodifieruserid" />
+    <result column="isdeleted" jdbcType="BIT" property="isdeleted" />
+    <result column="deleteruserid" jdbcType="BIGINT" property="deleteruserid" />
+    <result column="deletiontime" jdbcType="TIMESTAMP" property="deletiontime" />
+    <result column="infoid" jdbcType="VARCHAR" property="infoid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="isenable" jdbcType="BIT" property="isenable" />
+    <result column="callno" jdbcType="VARCHAR" property="callno" />
+    <result column="precallno" jdbcType="VARCHAR" property="precallno" />
+    <result column="catalogcode" jdbcType="VARCHAR" property="catalogcode" />
+    <result column="itemstate" jdbcType="TINYINT" property="itemstate" />
+    <result column="pressmarkid" jdbcType="VARCHAR" property="pressmarkid" />
+    <result column="pressmarkname" jdbcType="VARCHAR" property="pressmarkname" />
+    <result column="locationid" jdbcType="VARCHAR" property="locationid" />
+    <result column="locationname" jdbcType="VARCHAR" property="locationname" />
+    <result column="bookbarcode" jdbcType="VARCHAR" property="bookbarcode" />
+    <result column="isbn" jdbcType="VARCHAR" property="isbn" />
+    <result column="pubno" jdbcType="SMALLINT" property="pubno" />
+    <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+    <result column="pubdate" jdbcType="VARCHAR" property="pubdate" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="pages" jdbcType="VARCHAR" property="pages" />
+    <result column="itemtype" jdbcType="TINYINT" property="itemtype" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="origintype" jdbcType="TINYINT" property="origintype" />
+    <result column="createtype" jdbcType="TINYINT" property="createtype" />
+    <result column="tenantid" jdbcType="INTEGER" property="tenantid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huawei.owen.admin.model.Libitem">
+    <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, creationtime, creatoruserid, lastmodificationtime, lastmodifieruserid, isdeleted, 
+    deleteruserid, deletiontime, infoid, title, author, barcode, isenable, callno, precallno, 
+    catalogcode, itemstate, pressmarkid, pressmarkname, locationid, locationname, bookbarcode, 
+    isbn, pubno, publisher, pubdate, price, pages, itemtype, remark, origintype, createtype, 
+    tenantid
+  </sql>
+  <sql id="Blob_Column_List">
+    summary
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from libitem
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findPage" resultType="com.huawei.owen.admin.model.Libitem" resultMap="BaseResultMap">
+          select
+          <include refid="Base_Column_List"/>
+          from libitem order by creationtime desc 
+  </select>
+  <select id="findByBarcode" resultType="com.huawei.owen.admin.model.Libitem" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from libitem
+      where barcode = #{barcode, jdbcType=VARCHAR}
+  </select>
+  <select id="findPageByParams" resultType="com.huawei.owen.admin.model.Libitem" parameterType="com.huawei.owen.admin.vo.LibitemParams" resultMap="BaseResultMap">
+      <if test="title != null">
+            <bind name="title_pattern" value="'%' + title + '%'"/>
+        </if>
+      select
+      <include refid="Base_Column_List"/>
+      from libitem
+      where 1=1 
+      <if test="barcode != null and barcode != ''">
+          AND barcode = #{barcode}
+      </if>
+      <if test="title != null and title != ''">
+          AND title like #{title_pattern}
+      </if>
+      <if test="callno != null and callno != ''">
+          AND callno = #{callno}
+      </if>
+      <if test="isbn != null and isbn != ''">
+          AND isbn = #{isbn}
+      </if>
+  </select>
+ <select id="findPageByMap" resultType="com.huawei.owen.admin.model.Libitem" parameterType="map" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from libitem
+      where 1=1 
+      <if test="params.title != null and params.title != ''">
+          AND title LIKE CONCAT('%', #{params.title}, '%')
+      </if>
+      <if test="params.isbn != null and params.isbn != ''">
+          AND isbn= #{params.isbn}
+      </if>
+      <if test="params.callno != null and params.callno != ''">
+          AND callno =#{params.callno}
+      </if>
+      <if test="params.barcode != null and params.barcode != ''">
+          AND barcode =#{params.barcode}
+      </if>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from libitem
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libitem">
+    insert into libitem (id, creationtime, creatoruserid, 
+      lastmodificationtime, lastmodifieruserid, 
+      isdeleted, deleteruserid, deletiontime, 
+      infoid, title, author, 
+      barcode, isenable, callno, 
+      precallno, catalogcode, itemstate, 
+      pressmarkid, pressmarkname, locationid, 
+      locationname, bookbarcode, isbn, 
+      pubno, publisher, pubdate, 
+      price, pages, itemtype, 
+      remark, origintype, createtype, 
+      tenantid, summary)
+    values (#{id,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{isdeleted,jdbcType=BIT}, #{deleteruserid,jdbcType=BIGINT}, #{deletiontime,jdbcType=TIMESTAMP}, 
+      #{infoid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{isenable,jdbcType=BIT}, #{callno,jdbcType=VARCHAR}, 
+      #{precallno,jdbcType=VARCHAR}, #{catalogcode,jdbcType=VARCHAR}, #{itemstate,jdbcType=TINYINT}, 
+      #{pressmarkid,jdbcType=VARCHAR}, #{pressmarkname,jdbcType=VARCHAR}, #{locationid,jdbcType=VARCHAR}, 
+      #{locationname,jdbcType=VARCHAR}, #{bookbarcode,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, 
+      #{pubno,jdbcType=SMALLINT}, #{publisher,jdbcType=VARCHAR}, #{pubdate,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{pages,jdbcType=VARCHAR}, #{itemtype,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR}, #{origintype,jdbcType=TINYINT}, #{createtype,jdbcType=TINYINT}, 
+      #{tenantid,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libitem">
+    insert into libitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creationtime != null">
+        creationtime,
+      </if>
+      <if test="creatoruserid != null">
+        creatoruserid,
+      </if>
+      <if test="lastmodificationtime != null">
+        lastmodificationtime,
+      </if>
+      <if test="lastmodifieruserid != null">
+        lastmodifieruserid,
+      </if>
+      <if test="isdeleted != null">
+        isdeleted,
+      </if>
+      <if test="deleteruserid != null">
+        deleteruserid,
+      </if>
+      <if test="deletiontime != null">
+        deletiontime,
+      </if>
+      <if test="infoid != null">
+        infoid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="barcode != null">
+        barcode,
+      </if>
+      <if test="isenable != null">
+        isenable,
+      </if>
+      <if test="callno != null">
+        callno,
+      </if>
+      <if test="precallno != null">
+        precallno,
+      </if>
+      <if test="catalogcode != null">
+        catalogcode,
+      </if>
+      <if test="itemstate != null">
+        itemstate,
+      </if>
+      <if test="pressmarkid != null">
+        pressmarkid,
+      </if>
+      <if test="pressmarkname != null">
+        pressmarkname,
+      </if>
+      <if test="locationid != null">
+        locationid,
+      </if>
+      <if test="locationname != null">
+        locationname,
+      </if>
+      <if test="bookbarcode != null">
+        bookbarcode,
+      </if>
+      <if test="isbn != null">
+        isbn,
+      </if>
+      <if test="pubno != null">
+        pubno,
+      </if>
+      <if test="publisher != null">
+        publisher,
+      </if>
+      <if test="pubdate != null">
+        pubdate,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="pages != null">
+        pages,
+      </if>
+      <if test="itemtype != null">
+        itemtype,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="origintype != null">
+        origintype,
+      </if>
+      <if test="createtype != null">
+        createtype,
+      </if>
+      <if test="tenantid != null">
+        tenantid,
+      </if>
+      <if test="summary != null">
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoid != null">
+        #{infoid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isenable != null">
+        #{isenable,jdbcType=BIT},
+      </if>
+      <if test="callno != null">
+        #{callno,jdbcType=VARCHAR},
+      </if>
+      <if test="precallno != null">
+        #{precallno,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogcode != null">
+        #{catalogcode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemstate != null">
+        #{itemstate,jdbcType=TINYINT},
+      </if>
+      <if test="pressmarkid != null">
+        #{pressmarkid,jdbcType=VARCHAR},
+      </if>
+      <if test="pressmarkname != null">
+        #{pressmarkname,jdbcType=VARCHAR},
+      </if>
+      <if test="locationid != null">
+        #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="locationname != null">
+        #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="bookbarcode != null">
+        #{bookbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null">
+        #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="pubno != null">
+        #{pubno,jdbcType=SMALLINT},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null">
+        #{pubdate,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="pages != null">
+        #{pages,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtype != null">
+        #{itemtype,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="origintype != null">
+        #{origintype,jdbcType=TINYINT},
+      </if>
+      <if test="createtype != null">
+        #{createtype,jdbcType=TINYINT},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libitem">
+    update libitem
+    <set>
+      <if test="creationtime != null">
+        creationtime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        creatoruserid = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        lastmodificationtime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        lastmodifieruserid = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        isdeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        deleteruserid = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        deletiontime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoid != null">
+        infoid = #{infoid,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isenable != null">
+        isenable = #{isenable,jdbcType=BIT},
+      </if>
+      <if test="callno != null">
+        callno = #{callno,jdbcType=VARCHAR},
+      </if>
+      <if test="precallno != null">
+        precallno = #{precallno,jdbcType=VARCHAR},
+      </if>
+      <if test="catalogcode != null">
+        catalogcode = #{catalogcode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemstate != null">
+        itemstate = #{itemstate,jdbcType=TINYINT},
+      </if>
+      <if test="pressmarkid != null">
+        pressmarkid = #{pressmarkid,jdbcType=VARCHAR},
+      </if>
+      <if test="pressmarkname != null">
+        pressmarkname = #{pressmarkname,jdbcType=VARCHAR},
+      </if>
+      <if test="locationid != null">
+        locationid = #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="locationname != null">
+        locationname = #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="bookbarcode != null">
+        bookbarcode = #{bookbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isbn != null">
+        isbn = #{isbn,jdbcType=VARCHAR},
+      </if>
+      <if test="pubno != null">
+        pubno = #{pubno,jdbcType=SMALLINT},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="pubdate != null">
+        pubdate = #{pubdate,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="pages != null">
+        pages = #{pages,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtype != null">
+        itemtype = #{itemtype,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="origintype != null">
+        origintype = #{origintype,jdbcType=TINYINT},
+      </if>
+      <if test="createtype != null">
+        createtype = #{createtype,jdbcType=TINYINT},
+      </if>
+      <if test="tenantid != null">
+        tenantid = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        summary = #{summary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huawei.owen.admin.model.Libitem">
+    update libitem
+    set creationtime = #{creationtime,jdbcType=TIMESTAMP},
+      creatoruserid = #{creatoruserid,jdbcType=BIGINT},
+      lastmodificationtime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      lastmodifieruserid = #{lastmodifieruserid,jdbcType=BIGINT},
+      isdeleted = #{isdeleted,jdbcType=BIT},
+      deleteruserid = #{deleteruserid,jdbcType=BIGINT},
+      deletiontime = #{deletiontime,jdbcType=TIMESTAMP},
+      infoid = #{infoid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      isenable = #{isenable,jdbcType=BIT},
+      callno = #{callno,jdbcType=VARCHAR},
+      precallno = #{precallno,jdbcType=VARCHAR},
+      catalogcode = #{catalogcode,jdbcType=VARCHAR},
+      itemstate = #{itemstate,jdbcType=TINYINT},
+      pressmarkid = #{pressmarkid,jdbcType=VARCHAR},
+      pressmarkname = #{pressmarkname,jdbcType=VARCHAR},
+      locationid = #{locationid,jdbcType=VARCHAR},
+      locationname = #{locationname,jdbcType=VARCHAR},
+      bookbarcode = #{bookbarcode,jdbcType=VARCHAR},
+      isbn = #{isbn,jdbcType=VARCHAR},
+      pubno = #{pubno,jdbcType=SMALLINT},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      pubdate = #{pubdate,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      pages = #{pages,jdbcType=VARCHAR},
+      itemtype = #{itemtype,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      origintype = #{origintype,jdbcType=TINYINT},
+      createtype = #{createtype,jdbcType=TINYINT},
+      tenantid = #{tenantid,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libitem">
+    update libitem
+    set creationtime = #{creationtime,jdbcType=TIMESTAMP},
+      creatoruserid = #{creatoruserid,jdbcType=BIGINT},
+      lastmodificationtime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      lastmodifieruserid = #{lastmodifieruserid,jdbcType=BIGINT},
+      isdeleted = #{isdeleted,jdbcType=BIT},
+      deleteruserid = #{deleteruserid,jdbcType=BIGINT},
+      deletiontime = #{deletiontime,jdbcType=TIMESTAMP},
+      infoid = #{infoid,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      isenable = #{isenable,jdbcType=BIT},
+      callno = #{callno,jdbcType=VARCHAR},
+      precallno = #{precallno,jdbcType=VARCHAR},
+      catalogcode = #{catalogcode,jdbcType=VARCHAR},
+      itemstate = #{itemstate,jdbcType=TINYINT},
+      pressmarkid = #{pressmarkid,jdbcType=VARCHAR},
+      pressmarkname = #{pressmarkname,jdbcType=VARCHAR},
+      locationid = #{locationid,jdbcType=VARCHAR},
+      locationname = #{locationname,jdbcType=VARCHAR},
+      bookbarcode = #{bookbarcode,jdbcType=VARCHAR},
+      isbn = #{isbn,jdbcType=VARCHAR},
+      pubno = #{pubno,jdbcType=SMALLINT},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      pubdate = #{pubdate,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      pages = #{pages,jdbcType=VARCHAR},
+      itemtype = #{itemtype,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      origintype = #{origintype,jdbcType=TINYINT},
+      createtype = #{createtype,jdbcType=TINYINT},
+      tenantid = #{tenantid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

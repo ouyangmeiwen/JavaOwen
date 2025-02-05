@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.owen.admin.mapper.LibshelfMapper">
+  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libshelf">
+    <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
+    <result column="LastModificationTime" jdbcType="TIMESTAMP" property="lastmodificationtime" />
+    <result column="LastModifierUserId" jdbcType="BIGINT" property="lastmodifieruserid" />
+    <result column="IsDeleted" jdbcType="BIT" property="isdeleted" />
+    <result column="DeleterUserId" jdbcType="BIGINT" property="deleteruserid" />
+    <result column="DeletionTime" jdbcType="TIMESTAMP" property="deletiontime" />
+    <result column="Code" jdbcType="VARCHAR" property="code" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="ShelfNo" jdbcType="INTEGER" property="shelfno" />
+    <result column="Side" jdbcType="VARCHAR" property="side" />
+    <result column="RowIdentity" jdbcType="VARCHAR" property="rowidentity" />
+    <result column="RfidReaderId" jdbcType="VARCHAR" property="rfidreaderid" />
+    <result column="SerialPortId" jdbcType="VARCHAR" property="serialportid" />
+    <result column="IsEnable" jdbcType="BIT" property="isenable" />
+    <result column="X1" jdbcType="DECIMAL" property="x1" />
+    <result column="Y1" jdbcType="DECIMAL" property="y1" />
+    <result column="X2" jdbcType="DECIMAL" property="x2" />
+    <result column="Y2" jdbcType="DECIMAL" property="y2" />
+    <result column="Angel" jdbcType="DECIMAL" property="angel" />
+    <result column="StructId" jdbcType="VARCHAR" property="structid" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="TenantId" jdbcType="INTEGER" property="tenantid" />
+    <result column="IsBosseyed" jdbcType="BIT" property="isbosseyed" />
+  </resultMap>
+  <sql id="Base_Column_List">
+     Id, CreationTime, CreatorUserId, LastModificationTime, LastModifierUserId, IsDeleted, 
+      DeleterUserId, DeletionTime, Code, Name, ShelfNo, Side, RowIdentity, RfidReaderId, 
+      SerialPortId, IsEnable, X1, Y1, X2, Y2, Angel, StructId, Remark, TenantId, IsBosseyed
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from libshelf
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+   <select id="findPage" resultType="com.huawei.owen.admin.model.Libshelf" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from libshelf 
+    order by creationtime desc 
+  </select>
+ <select id="findPageByMap" resultType="com.huawei.owen.admin.model.Libshelf" parameterType="map" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from libshelf
+      where 1=1 
+      <if test="params.id != null and params.id != ''">
+          AND id =#{params.id}
+      </if>
+      <if test="params.rowids != null and params.rowids.size() > 0">
+          AND RowIdentity IN
+          <foreach item="rowid" collection="params.rowids" open="(" separator="," close=")">
+            #{rowid}
+          </foreach>
+      </if>
+      <if test="params.structId != null and params.structId != ''">
+          AND StructId =#{params.structId}
+      </if>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from libshelf
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libshelf">
+    insert into libshelf (Id, CreationTime, CreatorUserId, 
+      LastModificationTime, LastModifierUserId, 
+      IsDeleted, DeleterUserId, DeletionTime, 
+      Code, Name, ShelfNo, 
+      Side, RowIdentity, RfidReaderId, 
+      SerialPortId, IsEnable, X1, 
+      Y1, X2, Y2, Angel, 
+      StructId, Remark, TenantId, 
+      IsBosseyed)
+    values (#{id,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{isdeleted,jdbcType=BIT}, #{deleteruserid,jdbcType=BIGINT}, #{deletiontime,jdbcType=TIMESTAMP}, 
+      #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{shelfno,jdbcType=INTEGER}, 
+      #{side,jdbcType=VARCHAR}, #{rowidentity,jdbcType=VARCHAR}, #{rfidreaderid,jdbcType=VARCHAR}, 
+      #{serialportid,jdbcType=VARCHAR}, #{isenable,jdbcType=BIT}, #{x1,jdbcType=DECIMAL}, 
+      #{y1,jdbcType=DECIMAL}, #{x2,jdbcType=DECIMAL}, #{y2,jdbcType=DECIMAL}, #{angel,jdbcType=DECIMAL}, 
+      #{structid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}, 
+      #{isbosseyed,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libshelf">
+    insert into libshelf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="creationtime != null">
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId,
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime,
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId,
+      </if>
+      <if test="isdeleted != null">
+        IsDeleted,
+      </if>
+      <if test="deleteruserid != null">
+        DeleterUserId,
+      </if>
+      <if test="deletiontime != null">
+        DeletionTime,
+      </if>
+      <if test="code != null">
+        Code,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="shelfno != null">
+        ShelfNo,
+      </if>
+      <if test="side != null">
+        Side,
+      </if>
+      <if test="rowidentity != null">
+        RowIdentity,
+      </if>
+      <if test="rfidreaderid != null">
+        RfidReaderId,
+      </if>
+      <if test="serialportid != null">
+        SerialPortId,
+      </if>
+      <if test="isenable != null">
+        IsEnable,
+      </if>
+      <if test="x1 != null">
+        X1,
+      </if>
+      <if test="y1 != null">
+        Y1,
+      </if>
+      <if test="x2 != null">
+        X2,
+      </if>
+      <if test="y2 != null">
+        Y2,
+      </if>
+      <if test="angel != null">
+        Angel,
+      </if>
+      <if test="structid != null">
+        StructId,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="tenantid != null">
+        TenantId,
+      </if>
+      <if test="isbosseyed != null">
+        IsBosseyed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfno != null">
+        #{shelfno,jdbcType=INTEGER},
+      </if>
+      <if test="side != null">
+        #{side,jdbcType=VARCHAR},
+      </if>
+      <if test="rowidentity != null">
+        #{rowidentity,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidreaderid != null">
+        #{rfidreaderid,jdbcType=VARCHAR},
+      </if>
+      <if test="serialportid != null">
+        #{serialportid,jdbcType=VARCHAR},
+      </if>
+      <if test="isenable != null">
+        #{isenable,jdbcType=BIT},
+      </if>
+      <if test="x1 != null">
+        #{x1,jdbcType=DECIMAL},
+      </if>
+      <if test="y1 != null">
+        #{y1,jdbcType=DECIMAL},
+      </if>
+      <if test="x2 != null">
+        #{x2,jdbcType=DECIMAL},
+      </if>
+      <if test="y2 != null">
+        #{y2,jdbcType=DECIMAL},
+      </if>
+      <if test="angel != null">
+        #{angel,jdbcType=DECIMAL},
+      </if>
+      <if test="structid != null">
+        #{structid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="isbosseyed != null">
+        #{isbosseyed,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libshelf">
+    update libshelf
+    <set>
+      <if test="creationtime != null">
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="isdeleted != null">
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="deleteruserid != null">
+        DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      </if>
+      <if test="deletiontime != null">
+        DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="code != null">
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shelfno != null">
+        ShelfNo = #{shelfno,jdbcType=INTEGER},
+      </if>
+      <if test="side != null">
+        Side = #{side,jdbcType=VARCHAR},
+      </if>
+      <if test="rowidentity != null">
+        RowIdentity = #{rowidentity,jdbcType=VARCHAR},
+      </if>
+      <if test="rfidreaderid != null">
+        RfidReaderId = #{rfidreaderid,jdbcType=VARCHAR},
+      </if>
+      <if test="serialportid != null">
+        SerialPortId = #{serialportid,jdbcType=VARCHAR},
+      </if>
+      <if test="isenable != null">
+        IsEnable = #{isenable,jdbcType=BIT},
+      </if>
+      <if test="x1 != null">
+        X1 = #{x1,jdbcType=DECIMAL},
+      </if>
+      <if test="y1 != null">
+        Y1 = #{y1,jdbcType=DECIMAL},
+      </if>
+      <if test="x2 != null">
+        X2 = #{x2,jdbcType=DECIMAL},
+      </if>
+      <if test="y2 != null">
+        Y2 = #{y2,jdbcType=DECIMAL},
+      </if>
+      <if test="angel != null">
+        Angel = #{angel,jdbcType=DECIMAL},
+      </if>
+      <if test="structid != null">
+        StructId = #{structid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        TenantId = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="isbosseyed != null">
+        IsBosseyed = #{isbosseyed,jdbcType=BIT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libshelf">
+    update libshelf
+    set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      IsDeleted = #{isdeleted,jdbcType=BIT},
+      DeleterUserId = #{deleteruserid,jdbcType=BIGINT},
+      DeletionTime = #{deletiontime,jdbcType=TIMESTAMP},
+      Code = #{code,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      ShelfNo = #{shelfno,jdbcType=INTEGER},
+      Side = #{side,jdbcType=VARCHAR},
+      RowIdentity = #{rowidentity,jdbcType=VARCHAR},
+      RfidReaderId = #{rfidreaderid,jdbcType=VARCHAR},
+      SerialPortId = #{serialportid,jdbcType=VARCHAR},
+      IsEnable = #{isenable,jdbcType=BIT},
+      X1 = #{x1,jdbcType=DECIMAL},
+      Y1 = #{y1,jdbcType=DECIMAL},
+      X2 = #{x2,jdbcType=DECIMAL},
+      Y2 = #{y2,jdbcType=DECIMAL},
+      Angel = #{angel,jdbcType=DECIMAL},
+      StructId = #{structid,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      TenantId = #{tenantid,jdbcType=INTEGER},
+      IsBosseyed = #{isbosseyed,jdbcType=BIT}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

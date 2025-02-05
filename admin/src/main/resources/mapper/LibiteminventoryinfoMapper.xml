@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.owen.admin.mapper.LibiteminventoryinfoMapper">
+  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libiteminventoryinfo">
+     <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
+    <result column="LastModificationTime" jdbcType="TIMESTAMP" property="lastmodificationtime" />
+    <result column="LastModifierUserId" jdbcType="BIGINT" property="lastmodifieruserid" />
+    <result column="ItemTid" jdbcType="VARCHAR" property="itemtid" />
+    <result column="ItemEpc" jdbcType="VARCHAR" property="itemepc" />
+    <result column="LayerId" jdbcType="VARCHAR" property="layerid" />
+    <result column="Antenna" jdbcType="VARCHAR" property="antenna" />
+    <result column="InventoryState" jdbcType="TINYINT" property="inventorystate" />
+    <result column="ItemBarcode" jdbcType="VARCHAR" property="itembarcode" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="TenantId" jdbcType="INTEGER" property="tenantid" />
+    <result column="LayerCode" jdbcType="VARCHAR" property="layercode" />
+    <result column="ExceptionMsg" jdbcType="VARCHAR" property="exceptionmsg" />
+    <result column="OCRItemAuthor" jdbcType="VARCHAR" property="ocritemauthor" />
+    <result column="OCRItemCallNo" jdbcType="VARCHAR" property="ocritemcallno" />
+    <result column="OCRItemISBN" jdbcType="VARCHAR" property="ocritemisbn" />
+    <result column="OCRItemPublisher" jdbcType="VARCHAR" property="ocritempublisher" />
+    <result column="OCRItemTitle" jdbcType="VARCHAR" property="ocritemtitle" />
+    <result column="OriginType" jdbcType="TINYINT" property="origintype" />
+    <result column="LayerName" jdbcType="VARCHAR" property="layername" />
+    <result column="LocLayerCode" jdbcType="VARCHAR" property="loclayercode" />
+    <result column="LocLayerId" jdbcType="VARCHAR" property="loclayerid" />
+    <result column="LocLayerName" jdbcType="VARCHAR" property="loclayername" />
+    <result column="OffShelfTime" jdbcType="TIMESTAMP" property="offshelftime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+      Id, CreationTime, CreatorUserId, LastModificationTime, LastModifierUserId, ItemTid, 
+      ItemEpc, LayerId, Antenna, InventoryState, ItemBarcode, Remark, TenantId, LayerCode, 
+      ExceptionMsg, OCRItemAuthor, OCRItemCallNo, OCRItemISBN, OCRItemPublisher, OCRItemTitle, 
+      OriginType, LayerName, LocLayerCode, LocLayerId, LocLayerName, OffShelfTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from libiteminventoryinfo
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="findPage" resultType="com.huawei.owen.admin.model.Libiteminventoryinfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from libiteminventoryinfo 
+    order by creationtime desc 
+  </select>
+  <select id="findPageByMap" resultType="com.huawei.owen.admin.model.Libiteminventoryinfo" parameterType="map" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from libiteminventoryinfo
+      where 1=1 
+      <if test="params.id != null and params.id != ''">
+          AND id =#{params.id}
+      </if>
+      <if test="params.layerids != null and params.layerids.size() > 0">
+          AND LayerId IN
+          <foreach item="layerid" collection="params.layerids" open="(" separator="," close=")">
+            #{layerid}
+          </foreach>
+      </if>
+       <if test="params.filter != null and params.filter.length > 0">
+          AND ItemBarcode IN
+          <foreach item="ft" collection="params.filter" open="(" separator="," close=")">
+            #{ft}
+          </foreach>
+      </if>
+      <if test="params.minLastModificationTime != null ">
+          AND LastModificationTime  &gt; #{params.minLastModificationTime}
+      </if>
+      <if test="params.maxLastModificationTime != null ">
+          AND LastModificationTime  &lt; #{params.maxLastModificationTime}
+      </if>
+      <if test="params.inventoryState != null ">
+          AND InventoryState =#{params.inventoryState}
+      </if>
+      <if test="params.layerCodeFilter != null and params.layerCodeFilter != ''">
+          AND LayerCode  LIKE CONCAT('%', #{params.layerCodeFilter}, '%')
+      </if>
+      <if test="params.tenantId != null ">
+          AND TenantId =#{params.tenantId}
+      </if>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from libiteminventoryinfo
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+    insert into libiteminventoryinfo (Id, CreationTime, CreatorUserId, 
+      LastModificationTime, LastModifierUserId, 
+      ItemTid, ItemEpc, LayerId, 
+      Antenna, InventoryState, ItemBarcode, 
+      Remark, TenantId, LayerCode, 
+      ExceptionMsg, OCRItemAuthor, OCRItemCallNo, 
+      OCRItemISBN, OCRItemPublisher, OCRItemTitle, 
+      OriginType, LayerName, LocLayerCode, 
+      LocLayerId, LocLayerName, OffShelfTime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creatoruserid,jdbcType=BIGINT}, 
+      #{lastmodificationtime,jdbcType=TIMESTAMP}, #{lastmodifieruserid,jdbcType=BIGINT}, 
+      #{itemtid,jdbcType=VARCHAR}, #{itemepc,jdbcType=VARCHAR}, #{layerid,jdbcType=VARCHAR}, 
+      #{antenna,jdbcType=VARCHAR}, #{inventorystate,jdbcType=TINYINT}, #{itembarcode,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}, #{layercode,jdbcType=VARCHAR}, 
+      #{exceptionmsg,jdbcType=VARCHAR}, #{ocritemauthor,jdbcType=VARCHAR}, #{ocritemcallno,jdbcType=VARCHAR}, 
+      #{ocritemisbn,jdbcType=VARCHAR}, #{ocritempublisher,jdbcType=VARCHAR}, #{ocritemtitle,jdbcType=VARCHAR}, 
+      #{origintype,jdbcType=TINYINT}, #{layername,jdbcType=VARCHAR}, #{loclayercode,jdbcType=VARCHAR}, 
+      #{loclayerid,jdbcType=VARCHAR}, #{loclayername,jdbcType=VARCHAR}, #{offshelftime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+    insert into libiteminventoryinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="creationtime != null">
+        CreationTime,
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId,
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime,
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId,
+      </if>
+      <if test="itemtid != null">
+        ItemTid,
+      </if>
+      <if test="itemepc != null">
+        ItemEpc,
+      </if>
+      <if test="layerid != null">
+        LayerId,
+      </if>
+      <if test="antenna != null">
+        Antenna,
+      </if>
+      <if test="inventorystate != null">
+        InventoryState,
+      </if>
+      <if test="itembarcode != null">
+        ItemBarcode,
+      </if>
+      <if test="remark != null">
+        Remark,
+      </if>
+      <if test="tenantid != null">
+        TenantId,
+      </if>
+      <if test="layercode != null">
+        LayerCode,
+      </if>
+      <if test="exceptionmsg != null">
+        ExceptionMsg,
+      </if>
+      <if test="ocritemauthor != null">
+        OCRItemAuthor,
+      </if>
+      <if test="ocritemcallno != null">
+        OCRItemCallNo,
+      </if>
+      <if test="ocritemisbn != null">
+        OCRItemISBN,
+      </if>
+      <if test="ocritempublisher != null">
+        OCRItemPublisher,
+      </if>
+      <if test="ocritemtitle != null">
+        OCRItemTitle,
+      </if>
+      <if test="origintype != null">
+        OriginType,
+      </if>
+      <if test="layername != null">
+        LayerName,
+      </if>
+      <if test="loclayercode != null">
+        LocLayerCode,
+      </if>
+      <if test="loclayerid != null">
+        LocLayerId,
+      </if>
+      <if test="loclayername != null">
+        LocLayerName,
+      </if>
+      <if test="offshelftime != null">
+        OffShelfTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="itemtid != null">
+        #{itemtid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemepc != null">
+        #{itemepc,jdbcType=VARCHAR},
+      </if>
+      <if test="layerid != null">
+        #{layerid,jdbcType=VARCHAR},
+      </if>
+      <if test="antenna != null">
+        #{antenna,jdbcType=VARCHAR},
+      </if>
+      <if test="inventorystate != null">
+        #{inventorystate,jdbcType=TINYINT},
+      </if>
+      <if test="itembarcode != null">
+        #{itembarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="layercode != null">
+        #{layercode,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionmsg != null">
+        #{exceptionmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemauthor != null">
+        #{ocritemauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemcallno != null">
+        #{ocritemcallno,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemisbn != null">
+        #{ocritemisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritempublisher != null">
+        #{ocritempublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemtitle != null">
+        #{ocritemtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="origintype != null">
+        #{origintype,jdbcType=TINYINT},
+      </if>
+      <if test="layername != null">
+        #{layername,jdbcType=VARCHAR},
+      </if>
+      <if test="loclayercode != null">
+        #{loclayercode,jdbcType=VARCHAR},
+      </if>
+      <if test="loclayerid != null">
+        #{loclayerid,jdbcType=VARCHAR},
+      </if>
+      <if test="loclayername != null">
+        #{loclayername,jdbcType=VARCHAR},
+      </if>
+      <if test="offshelftime != null">
+        #{offshelftime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+    update libiteminventoryinfo
+    <set>
+      <if test="creationtime != null">
+        CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatoruserid != null">
+        CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodificationtime != null">
+        LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastmodifieruserid != null">
+        LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      </if>
+      <if test="itemtid != null">
+        ItemTid = #{itemtid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemepc != null">
+        ItemEpc = #{itemepc,jdbcType=VARCHAR},
+      </if>
+      <if test="layerid != null">
+        LayerId = #{layerid,jdbcType=VARCHAR},
+      </if>
+      <if test="antenna != null">
+        Antenna = #{antenna,jdbcType=VARCHAR},
+      </if>
+      <if test="inventorystate != null">
+        InventoryState = #{inventorystate,jdbcType=TINYINT},
+      </if>
+      <if test="itembarcode != null">
+        ItemBarcode = #{itembarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        TenantId = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="layercode != null">
+        LayerCode = #{layercode,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionmsg != null">
+        ExceptionMsg = #{exceptionmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemauthor != null">
+        OCRItemAuthor = #{ocritemauthor,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemcallno != null">
+        OCRItemCallNo = #{ocritemcallno,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemisbn != null">
+        OCRItemISBN = #{ocritemisbn,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritempublisher != null">
+        OCRItemPublisher = #{ocritempublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="ocritemtitle != null">
+        OCRItemTitle = #{ocritemtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="origintype != null">
+        OriginType = #{origintype,jdbcType=TINYINT},
+      </if>
+      <if test="layername != null">
+        LayerName = #{layername,jdbcType=VARCHAR},
+      </if>
+      <if test="loclayercode != null">
+        LocLayerCode = #{loclayercode,jdbcType=VARCHAR},
+      </if>
+      <if test="loclayerid != null">
+        LocLayerId = #{loclayerid,jdbcType=VARCHAR},
+      </if>
+      <if test="loclayername != null">
+        LocLayerName = #{loclayername,jdbcType=VARCHAR},
+      </if>
+      <if test="offshelftime != null">
+        OffShelfTime = #{offshelftime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+    update libiteminventoryinfo
+    set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
+      LastModificationTime = #{lastmodificationtime,jdbcType=TIMESTAMP},
+      LastModifierUserId = #{lastmodifieruserid,jdbcType=BIGINT},
+      ItemTid = #{itemtid,jdbcType=VARCHAR},
+      ItemEpc = #{itemepc,jdbcType=VARCHAR},
+      LayerId = #{layerid,jdbcType=VARCHAR},
+      Antenna = #{antenna,jdbcType=VARCHAR},
+      InventoryState = #{inventorystate,jdbcType=TINYINT},
+      ItemBarcode = #{itembarcode,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      TenantId = #{tenantid,jdbcType=INTEGER},
+      LayerCode = #{layercode,jdbcType=VARCHAR},
+      ExceptionMsg = #{exceptionmsg,jdbcType=VARCHAR},
+      OCRItemAuthor = #{ocritemauthor,jdbcType=VARCHAR},
+      OCRItemCallNo = #{ocritemcallno,jdbcType=VARCHAR},
+      OCRItemISBN = #{ocritemisbn,jdbcType=VARCHAR},
+      OCRItemPublisher = #{ocritempublisher,jdbcType=VARCHAR},
+      OCRItemTitle = #{ocritemtitle,jdbcType=VARCHAR},
+      OriginType = #{origintype,jdbcType=TINYINT},
+      LayerName = #{layername,jdbcType=VARCHAR},
+      LocLayerCode = #{loclayercode,jdbcType=VARCHAR},
+      LocLayerId = #{loclayerid,jdbcType=VARCHAR},
+      LocLayerName = #{loclayername,jdbcType=VARCHAR},
+      OffShelfTime = #{offshelftime,jdbcType=TIMESTAMP}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
