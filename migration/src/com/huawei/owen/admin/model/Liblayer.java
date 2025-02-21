@@ -1,4 +1,4 @@
-package com.huawei.owen.admin.model;
+package com.library.owen.admin.model;
 
 import java.io.Serializable;
 import java.util.Date;

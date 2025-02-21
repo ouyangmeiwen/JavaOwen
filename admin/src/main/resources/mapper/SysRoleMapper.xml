@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.SysRoleMapper">
-    <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.SysRole">
+<mapper namespace="com.library.owen.admin.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.library.owen.admin.model.SysRole">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -20,24 +20,24 @@
         from sys_role
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="findPage" resultType="com.huawei.owen.admin.model.SysRole" resultMap="BaseResultMap">
+    <select id="findPage" resultType="com.library.owen.admin.model.SysRole" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_role
     </select>
-    <select id="findAll" resultType="com.huawei.owen.admin.model.SysRole" resultMap="BaseResultMap">
+    <select id="findAll" resultType="com.library.owen.admin.model.SysRole" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_role
     </select>
-    <select id="findPageByName" resultType="com.huawei.owen.admin.model.SysRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findPageByName" resultType="com.library.owen.admin.model.SysRole" parameterType="java.lang.String" resultMap="BaseResultMap">
         <bind name="pattern" value="'%' + _parameter.name + '%'"/>
         select
         <include refid="Base_Column_List"/>
         from sys_role
         where name like #{pattern}
     </select>
-    <select id="findByName" resultType="com.huawei.owen.admin.model.SysRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findByName" resultType="com.library.owen.admin.model.SysRole" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_role
@@ -48,7 +48,7 @@
         from sys_role
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysRole" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysRole" useGeneratedKeys="true">
         insert into sys_role (`name`, remark, create_by,
                               create_time, last_update_by, last_update_time,
                               del_flag)
@@ -56,7 +56,7 @@
                 #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP},
                 #{delFlag,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysRole" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysRole" useGeneratedKeys="true">
         insert into sys_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -105,7 +105,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.SysRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.SysRole">
         update sys_role
         <set>
             <if test="name != null">
@@ -132,7 +132,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.SysRole">
+    <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.SysRole">
         update sys_role
         set `name`           = #{name,jdbcType=VARCHAR},
             remark           = #{remark,jdbcType=VARCHAR},

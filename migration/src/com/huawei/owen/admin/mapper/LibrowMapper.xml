@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.LibrowMapper">
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Librow">
+<mapper namespace="com.library.owen.admin.mapper.LibrowMapper">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Librow">
     <id column="Id" jdbcType="VARCHAR" property="id" />
     <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
@@ -88,7 +88,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" parameterType="com.huawei.owen.admin.model.LibrowQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.library.owen.admin.model.LibrowQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -115,13 +115,13 @@
     delete from librow
     where Id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.huawei.owen.admin.model.LibrowQuery">
+  <delete id="deleteByExample" parameterType="com.library.owen.admin.model.LibrowQuery">
     delete from librow
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Librow">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Librow">
     insert into librow (Id, CreationTime, CreatorUserId, 
       LastModificationTime, LastModifierUserId, 
       IsDeleted, DeleterUserId, DeletionTime, 
@@ -137,7 +137,7 @@
       #{locationid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Librow">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Librow">
     insert into librow
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -246,7 +246,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.huawei.owen.admin.model.LibrowQuery" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.library.owen.admin.model.LibrowQuery" resultType="java.lang.Long">
     select count(*) from librow
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -334,7 +334,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Librow">
+  <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Librow">
     update librow
     <set>
       <if test="creationtime != null">
@@ -388,7 +388,7 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Librow">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Librow">
     update librow
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},

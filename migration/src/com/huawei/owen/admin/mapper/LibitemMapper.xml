@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.LibitemMapper">
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libitem">
+<mapper namespace="com.library.owen.admin.mapper.LibitemMapper">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Libitem">
     <id column="Id" jdbcType="VARCHAR" property="id" />
     <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
@@ -36,7 +36,7 @@
     <result column="CreateType" jdbcType="TINYINT" property="createtype" />
     <result column="TenantId" jdbcType="INTEGER" property="tenantid" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huawei.owen.admin.model.Libitem">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.library.owen.admin.model.Libitem">
     <result column="Summary" jdbcType="LONGVARCHAR" property="summary" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -112,7 +112,7 @@
   <sql id="Blob_Column_List">
     Summary
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.huawei.owen.admin.model.LibitemQuery" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.library.owen.admin.model.LibitemQuery" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -128,7 +128,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.huawei.owen.admin.model.LibitemQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.library.owen.admin.model.LibitemQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -157,13 +157,13 @@
     delete from libitem
     where Id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.huawei.owen.admin.model.LibitemQuery">
+  <delete id="deleteByExample" parameterType="com.library.owen.admin.model.LibitemQuery">
     delete from libitem
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libitem">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Libitem">
     insert into libitem (Id, CreationTime, CreatorUserId, 
       LastModificationTime, LastModifierUserId, 
       IsDeleted, DeleterUserId, DeletionTime, 
@@ -189,7 +189,7 @@
       #{remark,jdbcType=VARCHAR}, #{origintype,jdbcType=TINYINT}, #{createtype,jdbcType=TINYINT}, 
       #{tenantid,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libitem">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Libitem">
     insert into libitem
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -400,7 +400,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.huawei.owen.admin.model.LibitemQuery" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.library.owen.admin.model.LibitemQuery" resultType="java.lang.Long">
     select count(*) from libitem
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -595,7 +595,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     <set>
       <if test="creationtime != null">
@@ -700,7 +700,7 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
@@ -737,7 +737,7 @@
       Summary = #{summary,jdbcType=LONGVARCHAR}
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
@@ -773,7 +773,7 @@
       TenantId = #{tenantid,jdbcType=INTEGER}
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libitem">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Libitem">
     <id column="Id" jdbcType="VARCHAR" property="id" />
     <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
@@ -808,7 +808,7 @@
     <result column="CreateType" jdbcType="TINYINT" property="createtype" />
     <result column="TenantId" jdbcType="INTEGER" property="tenantid" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huawei.owen.admin.model.Libitem">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.library.owen.admin.model.Libitem">
     <result column="Summary" jdbcType="LONGVARCHAR" property="summary" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -884,7 +884,7 @@
   <sql id="Blob_Column_List">
     Summary
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.huawei.owen.admin.model.LibitemQuery" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.library.owen.admin.model.LibitemQuery" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -900,7 +900,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.huawei.owen.admin.model.LibitemQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.library.owen.admin.model.LibitemQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -929,13 +929,13 @@
     delete from libitem
     where Id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.huawei.owen.admin.model.LibitemQuery">
+  <delete id="deleteByExample" parameterType="com.library.owen.admin.model.LibitemQuery">
     delete from libitem
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libitem">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Libitem">
     insert into libitem (Id, CreationTime, CreatorUserId, 
       LastModificationTime, LastModifierUserId, 
       IsDeleted, DeleterUserId, DeletionTime, 
@@ -961,7 +961,7 @@
       #{remark,jdbcType=VARCHAR}, #{origintype,jdbcType=TINYINT}, #{createtype,jdbcType=TINYINT}, 
       #{tenantid,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libitem">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Libitem">
     insert into libitem
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -1172,7 +1172,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.huawei.owen.admin.model.LibitemQuery" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.library.owen.admin.model.LibitemQuery" resultType="java.lang.Long">
     select count(*) from libitem
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -1367,7 +1367,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     <set>
       <if test="creationtime != null">
@@ -1472,7 +1472,7 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
@@ -1509,7 +1509,7 @@
       Summary = #{summary,jdbcType=LONGVARCHAR}
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.LibitemMapper">
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libitem">
+<mapper namespace="com.library.owen.admin.mapper.LibitemMapper">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Libitem">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="creationtime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="creatoruserid" jdbcType="BIGINT" property="creatoruserid" />
@@ -36,7 +36,7 @@
     <result column="createtype" jdbcType="TINYINT" property="createtype" />
     <result column="tenantid" jdbcType="INTEGER" property="tenantid" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huawei.owen.admin.model.Libitem">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.library.owen.admin.model.Libitem">
     <result column="summary" jdbcType="LONGVARCHAR" property="summary" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -57,18 +57,18 @@
     from libitem
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="findPage" resultType="com.huawei.owen.admin.model.Libitem" resultMap="BaseResultMap">
+  <select id="findPage" resultType="com.library.owen.admin.model.Libitem" resultMap="BaseResultMap">
           select
           <include refid="Base_Column_List"/>
           from libitem order by creationtime desc 
   </select>
-  <select id="findByBarcode" resultType="com.huawei.owen.admin.model.Libitem" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="findByBarcode" resultType="com.library.owen.admin.model.Libitem" parameterType="java.lang.String" resultMap="BaseResultMap">
       select
       <include refid="Base_Column_List"/>
       from libitem
       where barcode = #{barcode, jdbcType=VARCHAR}
   </select>
-  <select id="findPageByParams" resultType="com.huawei.owen.admin.model.Libitem" parameterType="com.huawei.owen.admin.vo.LibitemParams" resultMap="BaseResultMap">
+  <select id="findPageByParams" resultType="com.library.owen.admin.model.Libitem" parameterType="com.library.owen.admin.vo.LibitemParams" resultMap="BaseResultMap">
       <if test="title != null">
             <bind name="title_pattern" value="'%' + title + '%'"/>
         </if>
@@ -89,7 +89,7 @@
           AND isbn = #{isbn}
       </if>
   </select>
- <select id="findPageByMap" resultType="com.huawei.owen.admin.model.Libitem" parameterType="map" resultMap="BaseResultMap">
+ <select id="findPageByMap" resultType="com.library.owen.admin.model.Libitem" parameterType="map" resultMap="BaseResultMap">
       select
       <include refid="Base_Column_List"/>
       from libitem
@@ -112,7 +112,7 @@
     delete from libitem
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libitem">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Libitem">
     insert into libitem (id, creationtime, creatoruserid, 
       lastmodificationtime, lastmodifieruserid, 
       isdeleted, deleteruserid, deletiontime, 
@@ -138,7 +138,7 @@
       #{remark,jdbcType=VARCHAR}, #{origintype,jdbcType=TINYINT}, #{createtype,jdbcType=TINYINT}, 
       #{tenantid,jdbcType=INTEGER}, #{summary,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libitem">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Libitem">
     insert into libitem
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -349,7 +349,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     <set>
       <if test="creationtime != null">
@@ -454,7 +454,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     set creationtime = #{creationtime,jdbcType=TIMESTAMP},
       creatoruserid = #{creatoruserid,jdbcType=BIGINT},
@@ -491,7 +491,7 @@
       summary = #{summary,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libitem">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Libitem">
     update libitem
     set creationtime = #{creationtime,jdbcType=TIMESTAMP},
       creatoruserid = #{creatoruserid,jdbcType=BIGINT},

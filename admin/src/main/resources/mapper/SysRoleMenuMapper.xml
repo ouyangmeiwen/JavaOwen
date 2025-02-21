@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.SysRoleMenuMapper">
-    <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.SysRoleMenu">
+<mapper namespace="com.library.owen.admin.mapper.SysRoleMenuMapper">
+    <resultMap id="BaseResultMap" type="com.library.owen.admin.model.SysRoleMenu">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="role_id" jdbcType="BIGINT" property="roleId"/>
         <result column="menu_id" jdbcType="BIGINT" property="menuId"/>
@@ -19,13 +19,13 @@
         from sys_role_menu
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="findRoleMenus" resultType="com.huawei.owen.admin.model.SysRoleMenu" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="findRoleMenus" resultType="com.library.owen.admin.model.SysRoleMenu" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_role_menu
         where role_id = #{roleId,jdbcType=BIGINT}
     </select>
-    <select id="findAll" resultType="com.huawei.owen.admin.model.SysRoleMenu" resultMap="BaseResultMap">
+    <select id="findAll" resultType="com.library.owen.admin.model.SysRoleMenu" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_role_menu
@@ -40,13 +40,13 @@
         from sys_role_menu
         where role_id = #{roleId,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysRoleMenu" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysRoleMenu" useGeneratedKeys="true">
         insert into sys_role_menu (role_id, menu_id, create_by,
                                    create_time, last_update_by, last_update_time)
         values (#{roleId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysRoleMenu" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysRoleMenu" useGeneratedKeys="true">
         insert into sys_role_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roleId != null">
@@ -89,7 +89,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.SysRoleMenu">
+    <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.SysRoleMenu">
         update sys_role_menu
         <set>
             <if test="roleId != null">
@@ -113,7 +113,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.SysRoleMenu">
+    <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.SysRoleMenu">
         update sys_role_menu
         set role_id          = #{roleId,jdbcType=BIGINT},
             menu_id          = #{menuId,jdbcType=BIGINT},

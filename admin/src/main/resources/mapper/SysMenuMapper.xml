@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.SysMenuMapper">
-    <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.SysMenu">
+<mapper namespace="com.library.owen.admin.mapper.SysMenuMapper">
+    <resultMap id="BaseResultMap" type="com.library.owen.admin.model.SysMenu">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
@@ -26,24 +26,24 @@
         from sys_menu
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="findPage" resultType="com.huawei.owen.admin.model.SysMenu" resultMap="BaseResultMap">
+    <select id="findPage" resultType="com.library.owen.admin.model.SysMenu" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_menu
     </select>
-    <select id="findPageByName" resultType="com.huawei.owen.admin.model.SysMenu" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findPageByName" resultType="com.library.owen.admin.model.SysMenu" parameterType="java.lang.String" resultMap="BaseResultMap">
         <bind name="pattern" value="'%' + _parameter.name + '%'"/>
         select
         <include refid="Base_Column_List"/>
         from sys_menu
         where name like #{pattern}
     </select>
-    <select id="findAll" resultType="com.huawei.owen.admin.model.SysMenu" resultMap="BaseResultMap">
+    <select id="findAll" resultType="com.library.owen.admin.model.SysMenu" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_menu
     </select>
-    <select id="findByUserName" resultType="com.huawei.owen.admin.model.SysMenu" resultMap="BaseResultMap">
+    <select id="findByUserName" resultType="com.library.owen.admin.model.SysMenu" resultMap="BaseResultMap">
         select m.*
         from sys_menu m,
              sys_user u,
@@ -54,7 +54,7 @@
           and ur.role_id = rm.role_id
           and rm.menu_id = m.id
     </select>
-    <select id="findRoleMenus" resultType="com.huawei.owen.admin.model.SysMenu" resultMap="BaseResultMap">
+    <select id="findRoleMenus" resultType="com.library.owen.admin.model.SysMenu" resultMap="BaseResultMap">
         select m.*
         from sys_menu m,
              sys_role_menu rm
@@ -66,7 +66,7 @@
         from sys_menu
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysMenu" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysMenu" useGeneratedKeys="true">
         insert into sys_menu (`name`, parent_id, url,
                               perms, `type`, icon,
                               order_num, create_by, create_time,
@@ -76,7 +76,7 @@
                 #{orderNum,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
                 #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysMenu" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysMenu" useGeneratedKeys="true">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -155,7 +155,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.SysMenu">
+    <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.SysMenu">
         update sys_menu
         <set>
             <if test="name != null">
@@ -197,7 +197,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.SysMenu">
+    <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.SysMenu">
         update sys_menu
         set `name`           = #{name,jdbcType=VARCHAR},
             parent_id        = #{parentId,jdbcType=BIGINT},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.SysUserMapper">
-    <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.SysUser">
+<mapper namespace="com.library.owen.admin.mapper.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.library.owen.admin.model.SysUser">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
@@ -28,28 +28,28 @@
         from sys_user
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="findAll" resultType="com.huawei.owen.admin.model.SysUser">
+    <select id="findAll" resultType="com.library.owen.admin.model.SysUser">
         select
         <include refid="Base_Column_List"/>
         from sys_user
     </select>
-    <select id="findPage" resultType="com.huawei.owen.admin.model.SysUser">
+    <select id="findPage" resultType="com.library.owen.admin.model.SysUser">
         select
         <include refid="Base_Column_List"/>
         from sys_user
     </select>
-    <select id="findByName" resultType="com.huawei.owen.admin.model.SysUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findByName" resultType="com.library.owen.admin.model.SysUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName
         from sys_user u
         where u.name = #{name, jdbcType=VARCHAR}
     </select>
-    <select id="findPageByName" resultType="com.huawei.owen.admin.model.SysUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findPageByName" resultType="com.library.owen.admin.model.SysUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         <bind name="pattern" value="'%' + _parameter.name + '%'"/>
         select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName
         from sys_user u
         where u.name like #{pattern}
     </select>
-    <select id="findPageByNameAndEmail" resultType="com.huawei.owen.admin.model.SysUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findPageByNameAndEmail" resultType="com.library.owen.admin.model.SysUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         <bind name="patternName" value="'%' + _parameter.name + '%'"/>
         <bind name="patternEmail" value="'%' + _parameter.email + '%'"/>
         select u.*, (select d.name from sys_dept d where d.id = u.dept_id) deptName
@@ -63,7 +63,7 @@
         from sys_user
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysUser" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysUser" useGeneratedKeys="true">
         insert into sys_user (`name`, nick_name, avatar,
                               `password`, salt, email,
                               mobile, `status`, dept_id,
@@ -75,7 +75,7 @@
                 #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR},
                 #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysUser" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysUser" useGeneratedKeys="true">
         insert into sys_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -166,7 +166,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.SysUser">
+    <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.SysUser">
         update sys_user
         <set>
             <if test="name != null">
@@ -214,7 +214,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.SysUser">
+    <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.SysUser">
         update sys_user
         set `name`           = #{name,jdbcType=VARCHAR},
             nick_name        = #{nickName,jdbcType=VARCHAR},

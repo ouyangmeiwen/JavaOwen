@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.SysDeptMapper">
-    <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.SysDept">
+<mapper namespace="com.library.owen.admin.mapper.SysDeptMapper">
+    <resultMap id="BaseResultMap" type="com.library.owen.admin.model.SysDept">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
@@ -22,12 +22,12 @@
         from sys_dept
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="findPage" resultType="com.huawei.owen.admin.model.SysDept" resultMap="BaseResultMap">
+    <select id="findPage" resultType="com.library.owen.admin.model.SysDept" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_dept
     </select>
-    <select id="findAll" resultType="com.huawei.owen.admin.model.SysDept" resultMap="BaseResultMap">
+    <select id="findAll" resultType="com.library.owen.admin.model.SysDept" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_dept
@@ -37,7 +37,7 @@
         from sys_dept
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysDept" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysDept" useGeneratedKeys="true">
         insert into sys_dept (`name`, parent_id, order_num,
                               create_by, create_time, last_update_by,
                               last_update_time, del_flag)
@@ -45,7 +45,7 @@
                 #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR},
                 #{lastUpdateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysDept" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysDept" useGeneratedKeys="true">
         insert into sys_dept
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -100,7 +100,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.SysDept">
+    <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.SysDept">
         update sys_dept
         <set>
             <if test="name != null">
@@ -130,7 +130,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.SysDept">
+    <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.SysDept">
         update sys_dept
         set `name`           = #{name,jdbcType=VARCHAR},
             parent_id        = #{parentId,jdbcType=BIGINT},

@@ -1,0 +1,12 @@
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/exception/package-info.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/page/Param.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/page/PageRequest.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/page/MyBatisPageHelper.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/service/package-info.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/page/package-info.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/service/CurdService.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/http/HttpResult.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/page/PageResult.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/http/HttpStatus.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/http/package-info.java
+/home/owen/Github/JavaOwen/core/src/main/java/com/library/owen/core/service/CurdCustomService.java

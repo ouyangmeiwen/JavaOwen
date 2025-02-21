@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.SysUserRoleMapper">
-    <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.SysUserRole">
+<mapper namespace="com.library.owen.admin.mapper.SysUserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.library.owen.admin.model.SysUserRole">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="role_id" jdbcType="BIGINT" property="roleId"/>
@@ -19,7 +19,7 @@
         from sys_user_role
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="findUserRoles" resultType="com.huawei.owen.admin.model.SysUserRole" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="findUserRoles" resultType="com.library.owen.admin.model.SysUserRole" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_user_role
@@ -35,13 +35,13 @@
         from sys_user_role
         where user_id = #{userId, jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysUserRole" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysUserRole" useGeneratedKeys="true">
         insert into sys_user_role (user_id, role_id, create_by,
                                    create_time, last_update_by, last_update_time)
         values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.huawei.owen.admin.model.SysUserRole" useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.library.owen.admin.model.SysUserRole" useGeneratedKeys="true">
         insert into sys_user_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -84,7 +84,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.SysUserRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.SysUserRole">
         update sys_user_role
         <set>
             <if test="userId != null">
@@ -108,7 +108,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.SysUserRole">
+    <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.SysUserRole">
         update sys_user_role
         set user_id          = #{userId,jdbcType=BIGINT},
             role_id          = #{roleId,jdbcType=BIGINT},

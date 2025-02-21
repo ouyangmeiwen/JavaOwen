@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.LibiteminventoryinfoMapper">
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libiteminventoryinfo">
+<mapper namespace="com.library.owen.admin.mapper.LibiteminventoryinfoMapper">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Libiteminventoryinfo">
     <id column="Id" jdbcType="VARCHAR" property="id" />
     <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
@@ -98,7 +98,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" parameterType="com.huawei.owen.admin.model.LibiteminventoryinfoQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.library.owen.admin.model.LibiteminventoryinfoQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -125,13 +125,13 @@
     delete from libiteminventoryinfo
     where Id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.huawei.owen.admin.model.LibiteminventoryinfoQuery">
+  <delete id="deleteByExample" parameterType="com.library.owen.admin.model.LibiteminventoryinfoQuery">
     delete from libiteminventoryinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Libiteminventoryinfo">
     insert into libiteminventoryinfo (Id, CreationTime, CreatorUserId, 
       LastModificationTime, LastModifierUserId, 
       ItemTid, ItemEpc, LayerId, 
@@ -153,7 +153,7 @@
       #{loclayerid,jdbcType=VARCHAR}, #{loclayername,jdbcType=VARCHAR}, #{offshelftime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Libiteminventoryinfo">
     insert into libiteminventoryinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -316,7 +316,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.huawei.owen.admin.model.LibiteminventoryinfoQuery" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.library.owen.admin.model.LibiteminventoryinfoQuery" resultType="java.lang.Long">
     select count(*) from libiteminventoryinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -440,7 +440,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Libiteminventoryinfo">
     update libiteminventoryinfo
     <set>
       <if test="creationtime != null">
@@ -521,7 +521,7 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libiteminventoryinfo">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Libiteminventoryinfo">
     update libiteminventoryinfo
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},

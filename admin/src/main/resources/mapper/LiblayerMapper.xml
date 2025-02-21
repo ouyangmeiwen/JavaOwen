@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.LiblayerMapper">
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Liblayer">
+<mapper namespace="com.library.owen.admin.mapper.LiblayerMapper">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Liblayer">
     <id column="Id" jdbcType="VARCHAR" property="id" />
     <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
@@ -36,13 +36,13 @@
     from liblayer
     where Id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="findPage" resultType="com.huawei.owen.admin.model.Liblayer" resultMap="BaseResultMap">
+  <select id="findPage" resultType="com.library.owen.admin.model.Liblayer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from liblayer 
     order by creationtime desc 
   </select>
-<select id="findPageByMap" resultType="com.huawei.owen.admin.model.Liblayer" parameterType="map" resultMap="BaseResultMap">
+<select id="findPageByMap" resultType="com.library.owen.admin.model.Liblayer" parameterType="map" resultMap="BaseResultMap">
       select
       <include refid="Base_Column_List"/>
       from liblayer
@@ -64,7 +64,7 @@
     delete from liblayer
     where Id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Liblayer">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Liblayer">
     insert into liblayer (Id, CreationTime, CreatorUserId, 
       LastModificationTime, LastModifierUserId, 
       IsDeleted, DeleterUserId, DeletionTime, 
@@ -82,7 +82,7 @@
       #{itembarcode,jdbcType=VARCHAR}, #{itemcallno,jdbcType=VARCHAR}, #{precallno,jdbcType=VARCHAR}, 
       #{barcode,jdbcType=VARCHAR}, #{origintype,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Liblayer">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Liblayer">
     insert into liblayer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -221,7 +221,7 @@
       </if>
     </trim>
   </insert>
- <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Liblayer">
+ <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Liblayer">
     update liblayer
     <set>
       <if test="creationtime != null">
@@ -290,7 +290,7 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Liblayer">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Liblayer">
     update liblayer
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},

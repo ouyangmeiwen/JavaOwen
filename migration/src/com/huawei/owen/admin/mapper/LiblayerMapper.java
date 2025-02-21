@@ -1,7 +1,7 @@
-package com.huawei.owen.admin.mapper;
+package com.library.owen.admin.mapper;
 
-import com.huawei.owen.admin.model.Liblayer;
-import com.huawei.owen.admin.model.LiblayerQuery;
+import com.library.owen.admin.model.Liblayer;
+import com.library.owen.admin.model.LiblayerQuery;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

@@ -9,9 +9,9 @@ https://xxf.cool/tools/mybatisGenerator   生成mapper 的工具类
     使用插件 注释，lombok
 
     Model 包名：
-        com.huawei.owen.admin.model
+        com.library.owen.admin.model
     Mapper 包名：
-        com.huawei.owen.admin.mapper
+        com.library.owen.admin.mapper
     Mapper 后缀：
         Mapper
     
@@ -31,9 +31,9 @@ https://xxf.cool/tools/mybatisGenerator   生成mapper 的工具类
 
 
 3.生成Mapper.xml文件
-  <select id="findPage" resultType="com.huawei.owen.admin.model.Libitem" resultMap="BaseResultMap">
-  <select id="findByBarcode" resultType="com.huawei.owen.admin.model.Libitem" parameterType="java.lang.String" resultMap="BaseResultMap">
-  <select id="findPageByParams" resultType="com.huawei.owen.admin.model.Libitem" parameterType="com.huawei.owen.admin.vo.LibitemParams" resultMap="BaseResultMap">
+  <select id="findPage" resultType="com.library.owen.admin.model.Libitem" resultMap="BaseResultMap">
+  <select id="findByBarcode" resultType="com.library.owen.admin.model.Libitem" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="findPageByParams" resultType="com.library.owen.admin.model.Libitem" parameterType="com.library.owen.admin.vo.LibitemParams" resultMap="BaseResultMap">
   根据需要生成对应Mappper的方法实现
 4.定义Service.java
     分页方法都是调用统一的不用单独定义接口

@@ -50,7 +50,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.huawei.owen.admin.model
+  type-aliases-package: com.library.owen.admin.model
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #数据库日志打印

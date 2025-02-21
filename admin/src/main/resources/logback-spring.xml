@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.huawei.owen.admin" level="DEBUG" additivity="false">
+    <logger name="com.library.owen.admin" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE" />
     </logger>
 

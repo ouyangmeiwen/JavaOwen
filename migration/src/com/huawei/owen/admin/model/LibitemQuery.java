@@ -1,4 +1,4 @@
-package com.huawei.owen.admin.model;
+package com.library.owen.admin.model;
 
 import java.util.ArrayList;
 import java.util.Date;

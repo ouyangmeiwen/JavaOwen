@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huawei.owen.admin.mapper.LibshelfMapper">
-  <resultMap id="BaseResultMap" type="com.huawei.owen.admin.model.Libshelf">
+<mapper namespace="com.library.owen.admin.mapper.LibshelfMapper">
+  <resultMap id="BaseResultMap" type="com.library.owen.admin.model.Libshelf">
     <id column="Id" jdbcType="VARCHAR" property="id" />
     <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="CreatorUserId" jdbcType="BIGINT" property="creatoruserid" />
@@ -96,7 +96,7 @@
       ${fields}
     </if>
   </sql>
-  <select id="selectByExample" parameterType="com.huawei.owen.admin.model.LibshelfQuery" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.library.owen.admin.model.LibshelfQuery" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -123,13 +123,13 @@
     delete from libshelf
     where Id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.huawei.owen.admin.model.LibshelfQuery">
+  <delete id="deleteByExample" parameterType="com.library.owen.admin.model.LibshelfQuery">
     delete from libshelf
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.huawei.owen.admin.model.Libshelf">
+  <insert id="insert" parameterType="com.library.owen.admin.model.Libshelf">
     insert into libshelf (Id, CreationTime, CreatorUserId, 
       LastModificationTime, LastModifierUserId, 
       IsDeleted, DeleterUserId, DeletionTime, 
@@ -149,7 +149,7 @@
       #{structid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}, 
       #{isbosseyed,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.huawei.owen.admin.model.Libshelf">
+  <insert id="insertSelective" parameterType="com.library.owen.admin.model.Libshelf">
     insert into libshelf
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -306,7 +306,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.huawei.owen.admin.model.LibshelfQuery" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.library.owen.admin.model.LibshelfQuery" resultType="java.lang.Long">
     select count(*) from libshelf
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -426,7 +426,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huawei.owen.admin.model.Libshelf">
+  <update id="updateByPrimaryKeySelective" parameterType="com.library.owen.admin.model.Libshelf">
     update libshelf
     <set>
       <if test="creationtime != null">
@@ -504,7 +504,7 @@
     </set>
     where Id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huawei.owen.admin.model.Libshelf">
+  <update id="updateByPrimaryKey" parameterType="com.library.owen.admin.model.Libshelf">
     update libshelf
     set CreationTime = #{creationtime,jdbcType=TIMESTAMP},
       CreatorUserId = #{creatoruserid,jdbcType=BIGINT},
