@@ -48,3 +48,14 @@ https://xxf.cool/tools/mybatisGenerator   生成mapper 的工具类
 8.数据库日志打印
     logback-spring.xml
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl #数据库日志打印
+
+
+
+
+
+docker
+    docker build -t javaapi . -f Dockerfile
+
+    docker run -d -p 9528:9528 --restart=always --name javaapi  javaapi:latest
+    
+    http://localhost:9528/api/swagger-ui.html
