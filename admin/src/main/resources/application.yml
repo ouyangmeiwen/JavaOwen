@@ -3,8 +3,8 @@ spring:
     active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:mysql://127.0.0.1:3306/javadb?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
-    url: jdbc:mysql://127.0.0.1:3306/invengodbv41?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC #8个小时误差的问题
+    #url: jdbc:mysql://192.168.229.130:3306/javadb?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.229.130:3306/invengodbv41?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC #8个小时误差的问题
     username: root
     password: abc@123
     # druid配置
@@ -45,7 +45,7 @@ spring:
         reset-enable: true
         login-username: admin
         login-password: admin
-        allow: 127.0.0.1
+        allow: 192.168.229.130
         deny: 192.168.10.1
 
 mybatis:
