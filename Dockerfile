@@ -4,10 +4,6 @@ FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/maven:3.8.6-jdk-11-slim 
 # 设置工作目录
 WORKDIR /app
 
-# 将 pom.xml 和源代码复制到容器中
-# 设置工作目录
-WORKDIR /app
-
 # 将整个项目的源代码复制到容器中
 COPY . .
 

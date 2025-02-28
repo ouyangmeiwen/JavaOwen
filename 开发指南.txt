@@ -53,9 +53,29 @@ https://xxf.cool/tools/mybatisGenerator   生成mapper 的工具类
 
 
 
+this is java api
+#打包
+mvn clean package
+#docker 发布一定要用下面的进行打包Release
+mvn clean package -DskipTests
+
+cd /home/owen/Github/JavaOwen/admin/target
+
+java -jar admin-1.0-SNAPSHOT.jar  运行
+
+
+
+
 docker
     docker build -t javaapi . -f Dockerfile
-
     docker run -d -p 9528:9528 --restart=always --name javaapi  javaapi:latest
+    docker run -d -p 9528:9528  --name javaapi  javaapi:latest
+
+    
+
+    docker build -t javaapi:1.0 . -f DockerfileRelease
+    docker run -d -p 9528:9528  --name javaapi1.0  javaapi:1.0
+
+    
     
     http://localhost:9528/api/swagger-ui.html

@@ -1,0 +1,16 @@
+
+FROM swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/openjdk:11-jre-slim
+
+# 设置工作目录
+WORKDIR /app
+
+# 将构建好的 JAR 文件分别复制到不同的目录中
+COPY  ./admin/target/admin-1.0-SNAPSHOT.jar /app/admin/admin-1.0-SNAPSHOT.jar
+COPY  ./common/target/common-1.0-SNAPSHOT.jar /app/common/common-1.0-SNAPSHOT.jar
+COPY  ./core/target/core-1.0-SNAPSHOT.jar /app/core/core-1.0-SNAPSHOT.jar
+
+
+
+
+# 设置容器启动时执行的命令
+CMD ["java", "-jar", "/app/admin/admin-1.0-SNAPSHOT.jar"]
